@@ -1,0 +1,9 @@
+version: '2'
+services:
+    model:
+        container_name: DeepMushroom
+        build: .
+        ports:
+            - "5000:5000"
+        volumes:
+            - /model:/app/app/model
