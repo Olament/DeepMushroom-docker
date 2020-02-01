@@ -7,3 +7,8 @@ services:
             - "5000:5000"
         volumes:
             - /model:/app/app/model
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "10"
