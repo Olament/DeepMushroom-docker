@@ -11,6 +11,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 class_label = json.load(open(os.path.join('app', 'label.json')))
+label_to_url = json.load(open(os.path.join('app', 'label2url.json')))
 model = torch.load(os.path.join('app', 'model', 'model.pth'), map_location=torch.device('cpu'))
 model.eval()
 
@@ -31,7 +32,9 @@ def get_prediction(image_bytes):
     prob, indices = torch.topk(outputs, k=5)
     prob = prob.squeeze().detach().numpy()
     indices = indices.squeeze().numpy()
-    return [{'class_name': class_label[indices[i]], 'probability': "{0:.2f}".format(prob[i])} for i in range(5)]
+    return [{'class_name': class_label[indices[i]],
+             'probability': "{0:.2f}".format(prob[i]),
+             'inat_url': label_to_url[class_label[indices[i]]]} for i in range(5)]
 
 @app.route('/predict', methods=['POST'])
 def predict():
