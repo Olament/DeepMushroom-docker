@@ -36,13 +36,18 @@ def get_prediction(image_bytes):
              'probability': "{0:.2f}".format(prob[i]),
              'inat_url': label_to_url[class_label[indices[i]]]} for i in range(5)]
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    if request.method == 'POST':
-        file = request.files['file']
-        img_bytes = file.read()
-        pred = get_prediction(image_bytes=img_bytes)
-        return jsonify(pred)
+
+@app.route('/')
+def index():
+    return 'DeepMushroom API'
+
+# @app.route('/predict', methods=['POST'])
+# def predict():
+#     if request.method == 'POST':
+#         file = request.files['file']
+#         img_bytes = file.read()
+#         pred = get_prediction(image_bytes=img_bytes)
+#         return jsonify(pred)
 
 
 if __name__ == '__main__':
