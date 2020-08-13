@@ -1,6 +1,6 @@
-MAINTAINER Zixuan Guo <i@zxguo.me>
-
 FROM python:3.8.1-slim-buster
+
+MAINTAINER Zixuan Guo <i@zxguo.me>
 
 # set work directory
 WORKDIR /usr/src/app
