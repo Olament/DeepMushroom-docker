@@ -3,11 +3,11 @@ services:
     model:
         container_name: DeepMushroom
         build: ./service/web
-        command: gunicorn --bind 0.0.0.0:5000 app:app
+        command: gunicorn --bind 0.0.0.0:5000 manage:app
         ports:
             - "5000:5000"
         volumes:
-            - /model:/usr/src/app/web_inference/model
+            - /model:/usr/src/app/inference/model
         logging:
             driver: "json-file"
             options:
