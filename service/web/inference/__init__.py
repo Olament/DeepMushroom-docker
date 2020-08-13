@@ -10,9 +10,9 @@ from PIL import Image
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
-class_label = json.load(open(os.path.join('web_inference', 'label.json')))
-label_to_url = json.load(open(os.path.join('web_inference', 'label2url.json')))
-model = torch.load(os.path.join('web_inference', 'model', 'model.pth'), map_location=torch.device('cpu'))
+class_label = json.load(open(os.path.join('inference', 'label.json')))
+label_to_url = json.load(open(os.path.join('inference', 'label2url.json')))
+model = torch.load(os.path.join('inference', 'model', 'model.pth'), map_location=torch.device('cpu'))
 model.eval()
 
 def transform_image(image_bytes):
@@ -41,7 +41,7 @@ def get_prediction(image_bytes):
 def index():
     return 'DeepMushroom API'
 
-# @web_inference.route('/predict', methods=['POST'])
+# @inference.route('/predict', methods=['POST'])
 # def predict():
 #     if request.method == 'POST':
 #         file = request.files['file']
@@ -50,5 +50,5 @@ def index():
 #         return jsonify(pred)
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0')
