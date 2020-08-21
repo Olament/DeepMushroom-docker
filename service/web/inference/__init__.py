@@ -41,7 +41,7 @@ def get_prediction(image_bytes):
 def index():
     return 'DeepMushroom API'
 
-@inference.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
         file = request.files['file']
